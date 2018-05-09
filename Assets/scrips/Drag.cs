@@ -28,7 +28,7 @@ class Drag : MonoBehaviour
     void OnMouseDown()
     {
         initPos = this.gameObject.transform.position;
-        this.gameObject.transform.position = new Vector3(initPos.x, initPos.y, initPos.z);
+        this.gameObject.transform.position = new Vector3(initPos.x, initPos.y, 0.65f);
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
         //transform.position = new Vector3(transform.position.x - cateto, transform.position.y, 0.65f);
         dragging = true;

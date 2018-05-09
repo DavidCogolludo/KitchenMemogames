@@ -11,6 +11,8 @@ public class OB : MonoBehaviour{
         if (Input.GetMouseButtonDown(1))
         {
             preview.SetActive(true);
+            previewing = true;
+            initQ = preview.transform.rotation;
         }
        
     }
@@ -18,12 +20,30 @@ public class OB : MonoBehaviour{
     {
         
     }
+    bool previewing = false;
+    Quaternion initQ;
     public virtual void Update()
     {
-        if (Input.GetMouseButtonUp(1))
+       
+        if (previewing)
         {
-            preview.SetActive(false);
+            if (Input.GetMouseButtonUp(1))
+            {
+                preview.SetActive(false);
+                previewing = false;
+                preview.transform.rotation = initQ;
+            }
 
+           
+            if (Input.GetAxis("Mouse ScrollWheel") > 0) // forward
+ {
+               
+                preview.transform.Rotate(new Vector3(-4f,-5f,-3f));
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0) // back
+ {
+                preview.transform.Rotate(new Vector3(4f, 5f, 3f));
+            }
         }
     }
     public virtual void doStuff(string accion)

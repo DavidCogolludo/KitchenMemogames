@@ -14,7 +14,8 @@ public class Olla : OB
     {
         fuego.gameObject.SetActive(false);
         if(accion == "agua")
-        {
+        {   
+            
             agua = true;
             for(int i = 0; i < gameObject.transform.childCount; i++)
             {
@@ -25,6 +26,13 @@ public class Olla : OB
             }
             this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
 
+            for (int i = 0; i < preview.gameObject.transform.childCount; i++)
+            {
+                if (preview.gameObject.transform.GetChild(i).tag == accion)
+                {
+                    preview.gameObject.transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
         }
         else if(accion == "boil")
         {
@@ -46,6 +54,13 @@ public class Olla : OB
                     if (gameObject.transform.GetChild(i).tag == "agua")
                     {
                         gameObject.transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                }
+                for (int i = 0; i < preview.gameObject.transform.childCount; i++)
+                {
+                    if (preview.gameObject.transform.GetChild(i).tag == "agua")
+                    {
+                        preview.gameObject.transform.GetChild(i).gameObject.SetActive(false);
                     }
                 }
             }

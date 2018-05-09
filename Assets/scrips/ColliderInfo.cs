@@ -14,18 +14,17 @@ public class ColliderInfo : MonoBehaviour {
 	void Update () {
 		
 	}
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerStay(Collider other)
     {
-        if (GM.instance.draggin)
+        Debug.Log(other.gameObject);
+        if (Input.GetMouseButtonUp(0))
         {
             GM.instance.doStuff(accion, other.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (GM.instance.draggin)
-        {
-            GM.instance.doStuff(accion, null);
-        }
+        
     }
 }

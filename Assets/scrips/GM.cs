@@ -45,6 +45,7 @@ public class GM : MonoBehaviour {
     {
         accion_ = accion;
         target = go;
+
     }
     public void doStuff()
     {
