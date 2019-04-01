@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Olla : OB
-{
-    public Olla(){
-       
+public class Dish : OB {
+
+    public Dish()
+    {
+
     }
     bool agua = false;
-    bool hasContent = false;
-    public GameObject[] contenido;
-    public Light fuego; 
-    enum content { SPAGUETTIS}
+    //public Light fuego;
+
     public override void doStuff(string accion)
     {
-        fuego.gameObject.SetActive(false);
-        if(accion == "agua")
-        {   
-            
+        //fuego.gameObject.SetActive(false);
+        if (accion == "agua")
+        {
+
             agua = true;
-            for(int i = 0; i < gameObject.transform.childCount; i++)
+            for (int i = 0; i < gameObject.transform.childCount; i++)
             {
-                if(gameObject.transform.GetChild(i).tag == accion)
+                if (gameObject.transform.GetChild(i).tag == accion)
                 {
                     gameObject.transform.GetChild(i).gameObject.SetActive(true);
                 }
@@ -36,12 +35,12 @@ public class Olla : OB
                 }
             }
         }
-        else if(accion == "boil")
+        else if (accion == "boil")
         {
             if (agua)
             {
                 this.gameObject.transform.localPosition = new Vector3(-0.03341f, -0.01591f, 0.01261113f);
-                fuego.gameObject.SetActive(true);
+                //fuego.gameObject.SetActive(true);
             }
             else this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
 
@@ -68,18 +67,6 @@ public class Olla : OB
             }
             this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
         }
-        else if (accion == "spaguettis")
-        {
-            contenido[(int)content.SPAGUETTIS].gameObject.SetActive(true);
-            hasContent = true;
-        }
-        else if (accion == "plato")
-        {
-            if (hasContent)
-            {
-                contenido[(int)content.SPAGUETTIS].gameObject.SetActive(true);
-            }
-        }
-       
+
     }
 }

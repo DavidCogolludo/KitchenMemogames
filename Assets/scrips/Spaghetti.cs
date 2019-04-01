@@ -9,12 +9,13 @@ public class Spaghetti : OB
 
     }
 
-    public GameObject spaghettisCazuela;
+    public Olla olla;
     public override void doStuff(string accion)
     {
        if(accion == "Coloca")
        {
-            spaghettisCazuela.SetActive(true);
+            olla.doStuff("spaguettis");
+           
        }
 
     }
