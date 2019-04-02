@@ -932,6 +932,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   preview: {fileID: 1492656901}
   olla: {fileID: 1625916816}
+--- !u!1 &496010787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 100004, guid: e2e332e5286550e479fadf4b64f4d891,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496010788}
+  - component: {fileID: 496010790}
+  - component: {fileID: 496010789}
+  m_Layer: 8
+  m_Name: Spaghetti
+  m_TagString: spaguetti
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &496010788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 400004, guid: e2e332e5286550e479fadf4b64f4d891,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 496010787}
+  m_LocalRotation: {x: 0.6886652, y: -0.25553322, z: -0.27680042, w: 0.61953586}
+  m_LocalPosition: {x: 0.00013, y: -0.00065, z: 0.00159}
+  m_LocalScale: {x: 0.00020351654, y: 0.000099496945, z: 0.00022483736}
+  m_Children: []
+  m_Father: {fileID: 1881115874}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 45.385002, y: -96.468, z: -98.33}
+--- !u!23 &496010789
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 2300002, guid: e2e332e5286550e479fadf4b64f4d891,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 496010787}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 4d925c5006868444690a4b4f5293eca9, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &496010790
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3300002, guid: e2e332e5286550e479fadf4b64f4d891,
+    type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 496010787}
+  m_Mesh: {fileID: 4300002, guid: e2e332e5286550e479fadf4b64f4d891, type: 3}
 --- !u!1 &503267653
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,7 +1025,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &503267654
 Transform:
   m_ObjectHideFlags: 0
@@ -2529,8 +2605,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 1881115867}
-  contenido:
-  - {fileID: 1964007389}
   fuego: {fileID: 2017810143}
 --- !u!1 &1651948134
 GameObject:
@@ -2955,7 +3029,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preview: {fileID: 0}
-  contenido: []
   fuego: {fileID: 2017810143}
 --- !u!114 &1881115870
 MonoBehaviour:
@@ -3025,6 +3098,7 @@ Transform:
   m_LocalScale: {x: 38.519764, y: 38.51976, z: 38.519768}
   m_Children:
   - {fileID: 109017654}
+  - {fileID: 496010788}
   m_Father: {fileID: 129181981}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -137.544, y: -12.222992, z: 137.856}
@@ -3058,7 +3132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a2a146b8dd6f7249b77a13b4ab77f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accion: Coloca
+  accion: Olla
 --- !u!23 &1887113496
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3138,7 +3212,7 @@ GameObject:
   - component: {fileID: 1964007391}
   m_Layer: 8
   m_Name: Spaghetti
-  m_TagString: Untagged
+  m_TagString: spaguetti
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

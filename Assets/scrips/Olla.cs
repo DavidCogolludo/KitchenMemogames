@@ -8,38 +8,26 @@ public class Olla : OB
        
     }
     bool agua = false;
+    bool spaguettis = false;
     bool hasContent = false;
-    public GameObject[] contenido;
+  
     public Light fuego; 
-    enum content { SPAGUETTIS}
+
     public override void doStuff(string accion)
     {
         fuego.gameObject.SetActive(false);
+        //Si la acción es agua se llena de agua
         if(accion == "agua")
         {   
             
             agua = true;
-            for(int i = 0; i < gameObject.transform.childCount; i++)
-            {
-                if(gameObject.transform.GetChild(i).tag == accion)
-                {
-                    gameObject.transform.GetChild(i).gameObject.SetActive(true);
-                }
-            }
-            this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
-
-            for (int i = 0; i < preview.gameObject.transform.childCount; i++)
-            {
-                if (preview.gameObject.transform.GetChild(i).tag == accion)
-                {
-                    preview.gameObject.transform.GetChild(i).gameObject.SetActive(true);
-                }
-            }
+            setContent(accion, agua);
         }
-        else if(accion == "boil")
+        else if(accion == "boil") //Acción hervir 
         {
             if (agua)
             {
+                //SI hay agua se enciende el fuego
                 this.gameObject.transform.localPosition = new Vector3(-0.03341f, -0.01591f, 0.01261113f);
                 fuego.gameObject.SetActive(true);
             }
@@ -48,38 +36,45 @@ public class Olla : OB
         }
         else if (accion == "vaciar")
         {
+            //Si hay agua se vacía
             if (agua)
             {
                 agua = false;
-                for (int i = 0; i < gameObject.transform.childCount; i++)
-                {
-                    if (gameObject.transform.GetChild(i).tag == "agua")
-                    {
-                        gameObject.transform.GetChild(i).gameObject.SetActive(false);
-                    }
-                }
-                for (int i = 0; i < preview.gameObject.transform.childCount; i++)
-                {
-                    if (preview.gameObject.transform.GetChild(i).tag == "agua")
-                    {
-                        preview.gameObject.transform.GetChild(i).gameObject.SetActive(false);
-                    }
-                }
+                setContent(accion, agua);
             }
             this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
         }
-        else if (accion == "spaguettis")
+        else if (accion == "spaguetti")
         {
-            contenido[(int)content.SPAGUETTIS].gameObject.SetActive(true);
-            hasContent = true;
+           
+            spaguettis = true;
+            setContent(accion, spaguettis);
         }
-        else if (accion == "plato")
+        /*else if (accion == "plato")
         {
             if (hasContent)
             {
                 contenido[(int)content.SPAGUETTIS].gameObject.SetActive(true);
             }
-        }
+        }*/
        
+    }
+
+    private void setContent(string content, bool state)
+    {
+        for (int i = 0; i < gameObject.transform.childCount; i++)
+        {
+            if (gameObject.transform.GetChild(i).tag == content)
+            {
+                gameObject.transform.GetChild(i).gameObject.SetActive(state);
+            }
+        }
+        for (int i = 0; i < preview.gameObject.transform.childCount; i++)
+        {
+            if (preview.gameObject.transform.GetChild(i).tag == content)
+            {
+                preview.gameObject.transform.GetChild(i).gameObject.SetActive(state);
+            }
+        }
     }
 }

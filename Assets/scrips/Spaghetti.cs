@@ -12,9 +12,10 @@ public class Spaghetti : OB
     public Olla olla;
     public override void doStuff(string accion)
     {
-       if(accion == "Coloca")
+       
+       if(accion == "Olla")
        {
-            olla.doStuff("spaguettis");
+            olla.doStuff("spaguetti");
            
        }
 
