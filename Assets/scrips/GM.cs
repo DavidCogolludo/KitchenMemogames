@@ -19,7 +19,14 @@ public class GM : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (!_draggin&& Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Hola");
+            foreach (GameObject go in triggers)
+            {
+                go.SetActive(false);
+            }
+        }
 	}
 
     public void Draggin()
@@ -33,19 +40,27 @@ public class GM : MonoBehaviour {
     public void Dropped()
     {
         _draggin = false;
+        
+       foreach (GameObject go in triggers)
+       {
+            go.SetActive(false);
+       }
+        //doStuff();
+    }
+    private void OnMouseDown()
+    {
+        Debug.Log("Hola");
         foreach (GameObject go in triggers)
         {
             go.SetActive(false);
         }
-        doStuff();
     }
-
     string accion_; GameObject target = null;
     public void doStuff(string accion, GameObject go)
     {
         accion_ = accion;
         target = go;
-
+        doStuff();
     }
     public void doStuff()
     {

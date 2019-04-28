@@ -5,17 +5,25 @@ using UnityEngine;
 public class Olla : OB
 {
     public Olla(){
-       
+        
+    }
+    public ColliderInfo colInfo;
+    private void Start()
+    {
+        //colInfo = transform.Find("ColliderOlla").GetComponent<ColliderInfo>();
     }
     bool agua = false;
+    bool boiling = false;
     bool spaguettis = false;
+    bool coocked = false;
     bool hasContent = false;
-  
-    public Light fuego; 
+    public float timeToBoil;
 
+    public Thermometer thermometer;
+    public Light fuego;
     public override void doStuff(string accion)
     {
-        fuego.gameObject.SetActive(false);
+       
         //Si la acción es agua se llena de agua
         if(accion == "agua")
         {   
@@ -23,10 +31,17 @@ public class Olla : OB
             agua = true;
             setContent(accion, agua);
         }
+        
         else if(accion == "boil") //Acción hervir 
         {
-            if (agua)
+            if (agua && !coocked)
             {
+                boiling = true;
+                if (spaguettis)
+                {
+                    StartCoroutine(Boil());
+                    thermometer.gameObject.SetActive(true);
+                }
                 //SI hay agua se enciende el fuego
                 this.gameObject.transform.localPosition = new Vector3(-0.03341f, -0.01591f, 0.01261113f);
                 fuego.gameObject.SetActive(true);
@@ -39,25 +54,56 @@ public class Olla : OB
             //Si hay agua se vacía
             if (agua)
             {
+                boiling = false;
+                Debug.Log(coocked);
+                if(coocked) colInfo.accion = "ollaCoocked";
+                fuego.gameObject.SetActive(false);
+                thermometer.gameObject.SetActive(false);
                 agua = false;
-                setContent(accion, agua);
+                setContent("agua", agua);
+                setContent("particles", false);
             }
             this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
         }
         else if (accion == "spaguetti")
         {
-           
+            if (boiling)
+            {
+                StartCoroutine(Boil());
+                thermometer.gameObject.SetActive(true);
+            }
             spaguettis = true;
             setContent(accion, spaguettis);
         }
-        /*else if (accion == "plato")
+        else if (accion == "plato")
         {
-            if (hasContent)
+            if(!agua && spaguettis&& coocked)
             {
-                contenido[(int)content.SPAGUETTIS].gameObject.SetActive(true);
+                setContent("spaguettiCooked", false);
+                setContent("particles", false);
+                fuego.gameObject.SetActive(false);
+                thermometer.gameObject.SetActive(false);
+                coocked = false;
+                spaguettis = false;
+                colInfo.accion = "olla";
             }
-        }*/
+        }
        
+    }
+
+    IEnumerator Boil()
+    {
+        yield return new WaitForSeconds(timeToBoil);
+        if (spaguettis)
+        {
+            coocked = true;
+            setContent("spaguetti", false);
+            setContent("spaguettiCooked", true);
+            setContent("particles", true);
+            
+
+        }
+
     }
 
     private void setContent(string content, bool state)

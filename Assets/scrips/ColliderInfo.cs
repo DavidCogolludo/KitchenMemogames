@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColliderInfo : MonoBehaviour {
 
     public string accion;
+   
 	// Use this for initialization
 	void Start () {
         
@@ -14,17 +15,28 @@ public class ColliderInfo : MonoBehaviour {
 	void Update () {
 		
 	}
-    
-    private void OnTriggerStay(Collider other)
+    bool enter = false;
+    private Collider aux;
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject);
-        if (Input.GetMouseButtonUp(0))
+        enter = true;
+        aux = other;
+    }
+    private void OnDisable()
+    {
+        if (enter)
         {
-            GM.instance.doStuff(accion, other.gameObject);
+            if (!Input.GetMouseButton(0))
+            {
+                Debug.Log(aux.name + ", " + accion);
+                GM.instance.doStuff(accion, aux.gameObject);
+            }
+            enter = false;
         }
     }
     private void OnTriggerExit(Collider other)
     {
+        enter = false;
         
     }
 }

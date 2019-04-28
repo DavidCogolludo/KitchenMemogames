@@ -9,7 +9,7 @@ class Drag : MonoBehaviour
     private float distance;
     GM gameManager;
     Vector3 initPos;
-
+    public Camera camera;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ class Drag : MonoBehaviour
     void OnMouseDown()
     {
         initPos = this.gameObject.transform.position;
-        this.gameObject.transform.position = new Vector3(initPos.x, initPos.y, 0.65f);
-        distance = Vector3.Distance(transform.position, Camera.main.transform.position);
+        this.gameObject.transform.position = new Vector3(initPos.x, initPos.y, 6.5f);
+        distance = Vector3.Distance(transform.position, camera.transform.position);
         //transform.position = new Vector3(transform.position.x - cateto, transform.position.y, 0.65f);
         dragging = true;
         GM.instance.Draggin();
@@ -46,7 +46,7 @@ class Drag : MonoBehaviour
     {
         if (dragging)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             Vector3 rayPoint = ray.GetPoint(distance); //rayPoint.x = -0.0323f;
             transform.position = new Vector3(rayPoint.x, rayPoint.y, transform.position.z);
         }

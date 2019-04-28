@@ -13,7 +13,7 @@ public class Spaghetti : OB
     public override void doStuff(string accion)
     {
        
-       if(accion == "Olla")
+       if(accion == "olla")
        {
             olla.doStuff("spaguetti");
            

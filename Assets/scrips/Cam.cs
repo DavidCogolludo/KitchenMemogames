@@ -7,9 +7,9 @@ public class Cam : MonoBehaviour {
 
     // Use this for initialization
     public int dir;
-    private GameObject camara;
+    public GameObject camara;
 	void Start () {
-        camara = Camera.main.gameObject;
+        //camara = Camera.main.gameObject;
 
     }
 	
