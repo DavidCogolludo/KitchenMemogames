@@ -1,6 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
+public interface ICustomMessageTarget : IEventSystemHandler
+{
+    // functions that can be called via the messaging system
+    void receiveAction(States Action);
+    void setTexBox(string text);
+    void Message2();
+}
 
 public class OB : MonoBehaviour{
 
@@ -18,10 +27,12 @@ public class OB : MonoBehaviour{
     }
     void Start()
     {
-        
+       
     }
     bool previewing = false;
     Quaternion initQ;
+
+
     public virtual void Update()
     {
        
@@ -48,7 +59,18 @@ public class OB : MonoBehaviour{
     }
     public virtual void doStuff(string accion)
     {
-        Debug.Log("holiwi");
+       
+
+    }
+    public void sendAction(States action)
+    {
+        foreach (GameObject tg in GM.instance.listeners)
+            ExecuteEvents.Execute<ICustomMessageTarget>(tg, null, (x, y) => x.receiveAction(action));
+    }
+    public void sendText(string text)
+    {
+        foreach (GameObject tg in GM.instance.listeners)
+            ExecuteEvents.Execute<ICustomMessageTarget>(tg, null, (x, y) => x.setTexBox(text));
     }
 }
 

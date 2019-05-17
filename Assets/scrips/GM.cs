@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
+   public enum States { BOILINGSPAGUETTI, SPAGUETTIREADY, WATERBOILING, POTHASWATER,POTEMPTY}
 public class GM : MonoBehaviour {
-
     public GameObject[] triggers;
     public static GM instance;                   //Singelton del GM
-                                                 // Use this for initialization
+    public GameObject[] listeners;                            
     bool _draggin;
     void Start () {
         //Creamos el singleton
@@ -15,10 +16,21 @@ public class GM : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
         _draggin = false;
+       
     }
-	
-	// Update is called once per frame
-	void Update () {
+    public void sendAction(States action)
+    {
+        foreach (GameObject tg in listeners)
+            ExecuteEvents.Execute<ICustomMessageTarget>(tg, null, (x, y) => x.receiveAction(action));
+    }
+    public void sendText(string text)
+    {
+        foreach (GameObject tg in listeners)
+            ExecuteEvents.Execute<ICustomMessageTarget>(tg, null, (x, y) => x.setTexBox(text));
+    }
+  
+    // Update is called once per frame
+    void Update () {
         if (!_draggin&& Input.GetMouseButtonDown(0))
         {
             Debug.Log("Hola");

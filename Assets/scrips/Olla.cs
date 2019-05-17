@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Olla : OB
 {
@@ -25,9 +26,10 @@ public class Olla : OB
     {
        
         //Si la acción es agua se llena de agua
-        if(accion == "agua")
-        {   
-            
+        if (accion == "agua")
+        {
+            sendAction(States.POTHASWATER);
+           // sendText("¡Muy bien! Ahora pon a hervir el agua.");
             agua = true;
             setContent(accion, agua);
         }
@@ -39,14 +41,24 @@ public class Olla : OB
                 boiling = true;
                 if (spaguettis)
                 {
+                    sendAction(States.BOILINGSPAGUETTI);
                     StartCoroutine(Boil());
                     thermometer.gameObject.SetActive(true);
+                }
+                else
+                {
+                    sendAction(States.WATERBOILING);
                 }
                 //SI hay agua se enciende el fuego
                 this.gameObject.transform.localPosition = new Vector3(-0.03341f, -0.01591f, 0.01261113f);
                 fuego.gameObject.SetActive(true);
             }
-            else this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
+            else
+            {
+                this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
+                sendAction(States.POTEMPTY);
+                
+            }
 
         }
         else if (accion == "vaciar")
@@ -62,6 +74,11 @@ public class Olla : OB
                 agua = false;
                 setContent("agua", agua);
                 setContent("particles", false);
+                if (spaguettis)
+                {
+                    sendAction(States.SPAGUETTIREADY);
+                    //sendText("Busca un plato y sirve los spaguettis");
+                }
             }
             this.gameObject.transform.localPosition = new Vector3(-0.0323f, -0.0092f, 0.0125f);
         }
@@ -69,6 +86,7 @@ public class Olla : OB
         {
             if (boiling)
             {
+                sendAction(States.BOILINGSPAGUETTI);
                 StartCoroutine(Boil());
                 thermometer.gameObject.SetActive(true);
             }

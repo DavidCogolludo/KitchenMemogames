@@ -19,6 +19,7 @@ public class Dish : OB {
             hasContent = true;
             gameObject.transform.GetChild(numDressings).gameObject.SetActive(true);
             preview.gameObject.transform.GetChild(numDressings).gameObject.SetActive(true);
+            sendText("Añade la salsa de tomate y habrás terminado.");
         }
         else if(accion == "dressing" && hasContent)
        {
@@ -27,6 +28,7 @@ public class Dish : OB {
             preview.gameObject.transform.GetChild(numDressings).gameObject.SetActive(false);
             preview.gameObject.transform.GetChild(numDressings+1).gameObject.SetActive(true);
             numDressings++;
+            sendText("Muy bien!");
        }
 
     }
